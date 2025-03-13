@@ -34,22 +34,36 @@ async function init() {
   );
   CREATE TABLE employees;(
     id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    phone VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP DEFAULT now(),
-    ranking INTEGER DEFAULT 3 NOT NULL,
-    txt VARCHAR(255),
     department_id INTEGER REFERENCES departments(id) NOT NULL
   );
-  INSERT INTO departments (name) VALUES ('express');
-  INSERT INTO departments (name) VALUES ('SQL');
-  INSERT INTO departments (name) VALUES ('Personal Growth');
-  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn express', 5, (SELECT id FROM departments WHERE name = 'express'));
-  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn node', 2, (SELECT id FROM departments WHERE name = 'express'));
-  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn postgres', 4, (SELECT id FROM departments WHERE name = 'SQL'));
-  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn react', 1, (SELECT id FROM departments WHERE name = 'Personal Growth'));
-  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn javascript', 3, (SELECT id FROM departments WHERE name = 'SQL'));
-  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn css', 3, (SELECT id FROM departments WHERE name = 'Personal Growth'));
-  `;
+  INSERT INTO departments (name) VALUES ('warehouse');
+  INSERT INTO departments (name) VALUES ('Sales');
+  INSERT INTO departments (name) VALUES ('Csuite');
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Albert Mills', '(946) 529-4164'(SELECT id FROM departments WHERE name = 'warehouse'));,
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Jose Stamm', '1-405-787-8749 x4311' (SELECT id FROM departments WHERE name = 'sales'));,
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Ms. Allison Lehner', '996.680.3262 x467' (SELECT id FROM departments WHERE name = 'Csuite'));,
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Jessie Dibbert', '(204) 816-2524 x53873' (SELECT id FROM departments WHERE name = 'warehouse'));,
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Miss Maria Kiehn', '(206) 990-1990 x8370' (SELECT id FROM departments WHERE name = 'Sales'));,
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Geraldine King DDS', '337.218.2322 x6035' (SELECT id FROM departments WHERE name = 'Csuite'));,
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Jaime Murazik', '(820) 544-8026 x284' (SELECT id FROM departments WHERE name = 'warehouse'));,
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Brian Monahan', '(839) 289-4790 x338' (SELECT id FROM departments WHERE name = 'Sales'));,
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Vivian Reinger', '297.696.9011 x342' (SELECT id FROM departments WHERE name = 'Csuite'));,
+  INSERT INTO employees (name, phone, department_id ) 
+    VALUES ('Elbert Kiehn', '(339) 543-5497 x24059' (SELECT id FROM departments WHERE name = 'warehouse'));`;
+
   await client.query(SQL);
 
   //start server

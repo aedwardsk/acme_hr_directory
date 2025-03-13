@@ -29,11 +29,11 @@ router.get("/employees", async (req, res, next) => {
 
 router.post("/employees", async (req, res, next) => {
   try {
-    const { txt, department_id } = req.body;
+    const { name, phone, department_id } = req.body;
     const SQL = /*sql*/ `
-    INSERT INTO employees (txt, department_id) VALUES ($1, $2) RETURNING *;
+    INSERT INTO employees (name, phone, department_id) VALUES ($1,$2,$3) RETURNING *;
     `;
-    const response = await client.query(SQL, [txt, department_id]);
+    const response = await client.query(SQL, [name, phone, department_id]);
     res.status(201).send(response.rows[0]);
   } catch (error) {
     next(error);
@@ -42,12 +42,12 @@ router.post("/employees", async (req, res, next) => {
 
 router.put("/employees/:id", async (req, res, next) => {
   try {
-    const { txt, ranking, department_id } = req.body;
+    const { name, phone, department_id } = req.body;
     const SQL = /*sql*/ `
-    UPDATE employees  SET txt=$1, ranking=$2, department_id=$3, updated_at= now()
+    UPDATE employees  SET name=$1, phone=$2, department_id=$3, updated_at= now()
     WHERE id=$4 RETURNING *;
     `;
-    const response = await client.query(SQL, [txt, ranking, department_id, req.params.id]);
+    const response = await client.query(SQL, [name, phone, department_id, req.params.id]);
     res.send(response.rows[0]);
   } catch (error) {
     next(error);
