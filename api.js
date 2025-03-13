@@ -1,10 +1,10 @@
 const router = require("express").Router();
 const client = require("./db");
 
-router.get("/categories", async (req, res, next) => {
+router.get("/departments", async (req, res, next) => {
   try {
     const SQL = /*sql*/ `
-  SELECT * FROM categories;
+  SELECT * FROM departments;
   `;
     const response = await client.query(SQL);
 
@@ -14,10 +14,10 @@ router.get("/categories", async (req, res, next) => {
   }
 });
 
-router.get("/notes", async (req, res, next) => {
+router.get("/employees", async (req, res, next) => {
   try {
     const SQL = /*sql*/ `
-  SELECT * FROM notes;
+  SELECT * FROM employees;
   `;
     const response = await client.query(SQL);
 
@@ -27,37 +27,37 @@ router.get("/notes", async (req, res, next) => {
   }
 });
 
-router.post("/notes", async (req, res, next) => {
+router.post("/employees", async (req, res, next) => {
   try {
-    const { txt, category_id } = req.body;
+    const { txt, department_id } = req.body;
     const SQL = /*sql*/ `
-    INSERT INTO notes (txt, category_id) VALUES ($1, $2) RETURNING *;
+    INSERT INTO employees (txt, department_id) VALUES ($1, $2) RETURNING *;
     `;
-    const response = await client.query(SQL, [txt, category_id]);
+    const response = await client.query(SQL, [txt, department_id]);
     res.status(201).send(response.rows[0]);
   } catch (error) {
     next(error);
   }
 });
 
-router.put("/notes/:id", async (req, res, next) => {
+router.put("/employees/:id", async (req, res, next) => {
   try {
-    const { txt, ranking, category_id } = req.body;
+    const { txt, ranking, department_id } = req.body;
     const SQL = /*sql*/ `
-    UPDATE notes  SET txt=$1, ranking=$2, category_id=$3, updated_at= now()
+    UPDATE employees  SET txt=$1, ranking=$2, department_id=$3, updated_at= now()
     WHERE id=$4 RETURNING *;
     `;
-    const response = await client.query(SQL, [txt, ranking, category_id, req.params.id]);
+    const response = await client.query(SQL, [txt, ranking, department_id, req.params.id]);
     res.send(response.rows[0]);
   } catch (error) {
     next(error);
   }
 });
 
-router.delete("/notes/:id", async (req, res, next) => {
+router.delete("/employees/:id", async (req, res, next) => {
   try {
     const SQL = /*sql*/ `
-      DELETE from notes
+      DELETE from employees
       WHERE id = $1
     `;
     const response = await client.query(SQL, [req.params.id]);
