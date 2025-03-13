@@ -26,29 +26,29 @@ async function init() {
 
   //seed the database
   const SQL = /*sql*/ `
-  DROP TABLE IF EXISTS notes;
-  DROP TABLE IF EXISTS categories;
-  CREATE TABLE categories(
+  DROP TABLE IF EXISTS employees;
+  DROP TABLE IF EXISTS departments;
+  CREATE TABLE departments(
     id SERIAL PRIMARY KEY,
    name VARCHAR(50) NOT NULL 
   );
-  CREATE TABLE notes(
+  CREATE TABLE employees;(
     id SERIAL PRIMARY KEY,
     created_at TIMESTAMP DEFAULT now(),
     updated_at TIMESTAMP DEFAULT now(),
     ranking INTEGER DEFAULT 3 NOT NULL,
     txt VARCHAR(255),
-    category_id INTEGER REFERENCES categories(id) NOT NULL
+    department_id INTEGER REFERENCES departments(id) NOT NULL
   );
-  INSERT INTO categories (name) VALUES ('express');
-  INSERT INTO categories (name) VALUES ('SQL');
-  INSERT INTO categories (name) VALUES ('Personal Growth');
-  INSERT INTO notes (txt, ranking, category_id) VALUES ('learn express', 5, (SELECT id FROM categories WHERE name = 'express'));
-  INSERT INTO notes (txt, ranking, category_id) VALUES ('learn node', 2, (SELECT id FROM categories WHERE name = 'express'));
-  INSERT INTO notes (txt, ranking, category_id) VALUES ('learn postgres', 4, (SELECT id FROM categories WHERE name = 'SQL'));
-  INSERT INTO notes (txt, ranking, category_id) VALUES ('learn react', 1, (SELECT id FROM categories WHERE name = 'Personal Growth'));
-  INSERT INTO notes (txt, ranking, category_id) VALUES ('learn javascript', 3, (SELECT id FROM categories WHERE name = 'SQL'));
-  INSERT INTO notes (txt, ranking, category_id) VALUES ('learn css', 3, (SELECT id FROM categories WHERE name = 'Personal Growth'));
+  INSERT INTO departments (name) VALUES ('express');
+  INSERT INTO departments (name) VALUES ('SQL');
+  INSERT INTO departments (name) VALUES ('Personal Growth');
+  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn express', 5, (SELECT id FROM departments WHERE name = 'express'));
+  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn node', 2, (SELECT id FROM departments WHERE name = 'express'));
+  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn postgres', 4, (SELECT id FROM departments WHERE name = 'SQL'));
+  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn react', 1, (SELECT id FROM departments WHERE name = 'Personal Growth'));
+  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn javascript', 3, (SELECT id FROM departments WHERE name = 'SQL'));
+  INSERT INTO employees; (txt, ranking, department_id) VALUES ('learn css', 3, (SELECT id FROM departments WHERE name = 'Personal Growth'));
   `;
   await client.query(SQL);
 
