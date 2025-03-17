@@ -75,8 +75,6 @@ async function init() {
     });
   } catch (error) {
     console.error("Error seeding the database:", error);
-  } finally {
-    await client.end();
   }
 }
 
