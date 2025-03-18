@@ -6,7 +6,7 @@ const client = require("./db");
 const apiRouter = require("./api");
 
 const app = express();
-// const port = process.env.PORT || 3000;
+
 //middleware
 app.use(morgan("dev"));
 app.use(express.json());
